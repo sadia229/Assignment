@@ -12,7 +12,7 @@ class TopPicks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final products = ref.watch(productsProvider.notifier).products;
+        final products = ref.watch(productsProvider);
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -21,24 +21,30 @@ class TopPicks extends StatelessWidget {
                 sectionName: 'Top picks',
                 view: '',
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 17),
-                height: context.screenHeight * 0.35,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (ctx, index) {
-                    return TopPicksCard(
-                      tap: () {},
-                      tapColor: Colors.white,
-                      title: products[index].title,
-                      category: products[index].category,
-                      price: products[index].price.toString(),
-                    );
-                  },
-                ),
-              ),
+              products.when(
+                data: (data) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 17),
+                    height: context.screenHeight * 0.35,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: data.length,
+                      itemBuilder: (ctx, index) {
+                        return TopPicksCard(
+                          tap: () {},
+                          tapColor: Colors.white,
+                          title: data[index].title,
+                          category: data[index].category,
+                          price: data[index].price.toString(),
+                        );
+                      },
+                    ),
+                  );
+                },
+                error: (error, stackTrace) => Text(error.toString()),
+                loading: () => const CircularProgressIndicator(),
+              )
             ],
           ),
         );

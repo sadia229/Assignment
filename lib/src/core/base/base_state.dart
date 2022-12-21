@@ -11,7 +11,9 @@ class LoadingState extends BaseState {
 }
 
 class SuccessState extends BaseState {
-  const SuccessState();
+  const SuccessState(
+
+      );
 }
 
 class ErrorState extends BaseState {

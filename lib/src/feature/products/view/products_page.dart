@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pizza/src/core/colors/colors.dart';
 import 'package:pizza/src/core/extensions/extension.dart';
-import 'package:pizza/src/feature/home/components/category.dart';
 import 'package:pizza/src/feature/home/components/top_picks.dart';
 import 'package:pizza/src/widgets/appbar/app_bar.dart';
 import 'package:pizza/src/widgets/bottom_navigation/google_navigation.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class ProductsPage extends StatelessWidget {
+  const ProductsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
